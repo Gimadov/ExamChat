@@ -1,0 +1,60 @@
+﻿<Page x:Class="ChatDemoExam.Pages.ChatRoomPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ChatDemoExam.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ChatRoomPage">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="179*"/>
+            <ColumnDefinition Width="354*"/>
+            <ColumnDefinition Width="267*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="282*"/>
+            <RowDefinition Height="67*"/>
+            <RowDefinition Height="101*" />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="2">
+            <StackPanel>
+                <ListView x:Name="LvUser" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Employee.Name}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </Border>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Button x:Name="BtnAddUser" Content="Add User" Click="BtnAddUser_Click" Background="White" BorderThickness="2"/>
+            <Button x:Name="BtnChangeTopic" Content="Change Topic" Click="BtnChangeTopic_Click" Background="White" BorderThickness="2"/>
+            <Button x:Name="LeaveChatroom" Content="Leave Chatroom" Click="LeaveChatroom_Click" Background="White" BorderThickness="2"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.ColumnSpan="2"  Grid.RowSpan="2" Grid.Column="1">
+            <TextBox x:Name="TxtMessage" BorderThickness="5" Width="471" />
+            <Button x:Name="BtnSend" Content="Send" Click="BtnSend_Click" Width="149" Background="LightSkyBlue"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
+            <ListView x:Name="LvMessages" Grid.Column="1"
+                   Height="280"
+                  Width="620"
+                  ItemsSource="{Binding Chatroom.ChatMessages}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock  TextWrapping="Wrap">
+                        <Run Text="{Binding Date, StringFormat= dd.MM HH:mm}" />
+                        <Run Text="{Binding Employee.Name}"/>
+                        <Run Text=":"/>
+                        <Run Text="{Binding Message}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>
